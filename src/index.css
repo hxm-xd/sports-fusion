@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pool-blue: #00BFFF;
+  --color-deep-ocean: #006994;
+  --color-water-cyan: #E0FFFF;
+}
+
+
+
