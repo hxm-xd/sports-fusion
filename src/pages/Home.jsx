@@ -49,62 +49,64 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
     const isEven = index % 2 === 0;
     
     return (
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-deep-ocean border-t border-white/10">
-             {/* Background Image with Gradient Overlay */}
-            <div className="absolute inset-0 z-0">
+    <section className="relative h-[200vh] bg-deep-ocean border-t border-white/10">
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        {/* Background Image with Gradient Overlay */}
+        <div className="absolute inset-0 z-0">
           <img src={image} alt={title} className="w-full h-full object-cover opacity-15" />
           <div className="absolute inset-0 bg-deep-ocean/85"></div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
-                    <div className={`${!isEven ? 'lg:order-2' : ''}`}>
-                         <motion.div 
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight">
-                                {title.split(' ').map((word, i) => (
-                                    <span key={i} className={i === 1 ? 'text-pool-blue' : ''}> {word} </span>
-                                ))}
-                            </h2>
-                            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-                                {description}
-                            </p>
-                            
-                            {features && (
-                                <ul className="space-y-4 mb-10">
-                                    {features.map((feature, i) => (
-                                        <li key={i} className="flex items-center text-white/90">
-                                          <span className="w-2 h-2 bg-pool-blue rounded-none mr-4"></span>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-
-                            {linkText && (
-                                <a href={linkUrl} className="text-pool-blue font-bold text-lg hover:text-white transition-colors inline-flex items-center group">
-                                    {linkText} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                </a>
-                            )}
-                        </motion.div>
-                    </div>
-
-                    <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="aspect-[4/3] rounded-md overflow-hidden border border-white/15"
-                        >
-                             <img src={image} alt={title} className="w-full h-full object-cover" />
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
+          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center`}>
+            <div className={`${!isEven ? 'lg:order-2' : ''}`}>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight">
+                  {title.split(' ').map((word, i) => (
+                    <span key={i} className={i === 1 ? 'text-pool-blue' : ''}> {word} </span>
+                  ))}
+                </h2>
+                <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
+                  {description}
+                </p>
+
+                {features && (
+                  <ul className="space-y-4 mb-10">
+                    {features.map((feature, i) => (
+                      <li key={i} className="flex items-center text-white/90">
+                        <span className="w-2 h-2 bg-pool-blue rounded-none mr-4"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {linkText && (
+                  <a href={linkUrl} className="text-pool-blue font-bold text-lg hover:text-white transition-colors inline-flex items-center group">
+                    {linkText} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                )}
+              </motion.div>
+            </div>
+
+            <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="aspect-[4/3] rounded-md overflow-hidden border border-white/15"
+              >
+                <img src={image} alt={title} className="w-full h-full object-cover" />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     );
 };
 

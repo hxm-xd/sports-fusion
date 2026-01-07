@@ -53,10 +53,7 @@ const Navbar = () => {
                             <NavLink to="/">Home</NavLink>
                             <NavLink to="/services">Services</NavLink>
                             <NavLink to="/about">About</NavLink>
-                            <NavLink to="/contact">Contact</NavLink>
-                             <Link to="/contact" className="ml-4 px-5 py-2.5 rounded-sm bg-pool-blue text-deep-ocean text-sm font-bold hover:bg-water-cyan transition-colors duration-200 ring-1 ring-white/10">
-                                Get Started
-                            </Link>
+                            
                         </div>
 
                         {/* Mobile Menu Button */}
