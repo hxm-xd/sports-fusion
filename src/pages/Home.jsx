@@ -194,7 +194,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <SportCard 
                     title="Artistic Swimming" 
-                    image="https://images.unsplash.com/photo-1515234159518-e214d02b8d54?q=80&w=2070&auto=format&fit=crop"
+                  image="https://res.cloudinary.com/usopc-prod/image/upload/v1704463720/NGB%20Artistic%20Swimming/Photos/IMG_1155.jpg"
                 />
                 <SportCard 
                     title="Athletics" 
