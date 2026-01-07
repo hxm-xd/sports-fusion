@@ -1,101 +1,230 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Activity, Clock, ShieldCheck } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+
+const homeVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const services = [
+    {
+        title: "Real-Time Analytics",
+        description: "Keep spectators and athletes informed with instant result processing. Our systems ensure that every split second is captured and displayed with zero latency.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        features: ["Live Scoreboard Integration", "Instant Web Publishing", "Heat & Lane Assignment"]
+    },
+    {
+        title: "Event Management",
+        description: "From seeding heats to managing finals, our comprehensive tools take the stress out of meet organization. Focus on the competition, not the paperwork.",
+        image: "https://images.unsplash.com/photo-1519315901367-f34ff9154487?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        linkText: "Discover Solutions",
+        linkUrl: "/services"
+    },
+    {
+        title: "Live Broadcasting",
+        description: "Bring the excitement to a global audience. Our integrated broadcasting tools make it easy to stream high-quality event coverage and replays.",
+        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        linkText: "Learn More",
+        linkUrl: "/services"
+    }
+];
+
+const StickySlide = ({ title, description, image, features, linkText, linkUrl, index }) => {
+    const isEven = index % 2 === 0;
+    
+    return (
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-deep-ocean border-t border-white/5">
+             {/* Background Image with Gradient Overlay */}
+            <div className="absolute inset-0 z-0">
+                <img src={image} alt={title} className="w-full h-full object-cover opacity-20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-deep-ocean via-deep-ocean/95 to-deep-ocean/40"></div>
+                {/* Additional gradient for bottom fade */}
+                <div className="absolute inset-0 bg-gradient-to-t from-deep-ocean via-transparent to-transparent"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
+                    <div className={`${!isEven ? 'lg:order-2' : ''}`}>
+                         <motion.div 
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+                                {title.split(' ').map((word, i) => (
+                                    <span key={i} className={i === 1 ? 'text-pool-blue' : ''}> {word} </span>
+                                ))}
+                            </h2>
+                            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
+                                {description}
+                            </p>
+                            
+                            {features && (
+                                <ul className="space-y-4 mb-10">
+                                    {features.map((feature, i) => (
+                                        <li key={i} className="flex items-center text-white/90">
+                                            <span className="w-2 h-2 bg-pool-blue rounded-sm mr-4"></span>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+
+                            {linkText && (
+                                <a href={linkUrl} className="text-pool-blue font-bold text-lg hover:text-white transition-colors inline-flex items-center group">
+                                    {linkText} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                </a>
+                            )}
+                        </motion.div>
+                    </div>
+
+                    <div className={`relative ${!isEven ? 'lg:order-1' : ''}`}>
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="aspect-[4/3] rounded-lg overflow-hidden shadow-2xl shadow-pool-blue/10 border border-white/10"
+                        >
+                             <img src={image} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                        </motion.div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Home = () => {
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+
   return (
-    <div className="w-full">
+    <div className="w-full bg-deep-ocean">
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center bg-gradient-to-br from-deep-ocean to-pool-blue overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-             {/* Placeholder for a swimming pool background pattern or image */}
-             <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center"></div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+             <div className="absolute inset-0 bg-deep-ocean/50 z-10"></div>
+             {/* Dynamic Pool Background */}
+             <motion.div 
+                style={{ y: y1 }}
+                className="w-full h-[120%] -mt-20 bg-[url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center"
+             ></motion.div>
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto text-white">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight"
-          >
-            Precision & Speed
-            <span className="block text-water-cyan text-4xl md:text-5xl mt-2">In and Out of the Water</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-xl md:text-2xl mb-8 text-blue-100"
-          >
-            Integrated IT solutions designed to streamline every aspect of swimming meet management.
-          </motion.p>
-          
+        <div className="relative z-20 text-center px-4 max-w-5xl mx-auto text-white">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            initial="hidden"
+            animate="visible"
+            variants={homeVariants}
+            className="flex flex-col items-center"
           >
-            <a href="/contact" className="inline-flex items-center px-8 py-3 bg-white text-deep-ocean font-bold rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
-              Get Started <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+           
+            <motion.h1 
+              variants={itemVariants}
+              className="text-5xl md:text-8xl font-light mb-8 tracking-tighter"
+            >
+              Precision <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-pool-blue to-white">Meets</span> Performance
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-lg md:text-2xl mb-12 text-white/80 max-w-3xl font-light leading-relaxed"
+            >
+              Streamline your meets with integrated IT solutions designed for the modern swimming ecosystem.
+            </motion.p>
+            
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-6"
+            >
+              <a href="/contact" className="group px-8 py-4 bg-pool-blue text-deep-ocean font-bold rounded-md hover:bg-white transition-all duration-300 transform hover:-translate-y-1 flex items-center">
+                Get Started <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a href="/services" className="px-8 py-4 bg-transparent border border-white/30 text-white font-medium rounded-md hover:bg-white/10 transition-all duration-300">
+                Explore Services
+              </a>
+            </motion.div>
           </motion.div>
         </div>
+        
+        {/* Scroll Indicator */}
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/50"
+        >
+            <span className="text-xs uppercase tracking-widest mb-2">Scroll</span>
+            <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
+                <div className="w-full h-1/2 bg-white animate-pulsedown"></div>
+            </div>
+        </motion.div>
       </section>
 
-      {/* Features Overview */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl text-deep-ocean">Why Choose Sports Fusion?</h2>
-            <p className="mt-4 text-xl text-gray-500">We bring technology to the pool deck.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <FeatureCard 
-              icon={<Clock className="h-10 w-10 text-white" />}
-              title="Real-time Results"
-              description="Instant result processing and display, keeping spectators and athletes informed to the second."
-            />
-            <FeatureCard 
-              icon={<ShieldCheck className="h-10 w-10 text-white" />}
-              title="Accuracy & Reliability"
-              description="Fault-tolerant systems ensuring race data is captured accurately every single time."
-            />
-            <FeatureCard 
-              icon={<Activity className="h-10 w-10 text-white" />}
-              title="Event Management"
-              description="Comprehensive tools for meet organization, heat generation, and athlete seeding."
-            />
-          </div>
-        </div>
-      </section>
+      {/* Sticky Services Slides */}
+      <div className="relative">
+        {services.map((service, index) => (
+            <StickySlide key={index} {...service} index={index} />
+        ))}
+      </div>
 
        {/* Other Sports Section */}
-       <section className="py-20 bg-water-cyan/30">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-deep-ocean mb-6">Beyond Swimming</h2>
-            <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
-                While we specialize in swimming, our expertise extends to artistic swimming, athletics, football, and other sports.
-            </p>
+       <section className="py-32 bg-deep-ocean relative z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Beyond the Pool</h2>
+                <p className="text-lg text-text-dim max-w-2xl mx-auto">
+                    Expertise that translates across disciplines.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <SportCard 
+                    title="Artistic Swimming" 
+                    image="https://images.unsplash.com/photo-1515234159518-e214d02b8d54?q=80&w=2070&auto=format&fit=crop"
+                />
+                <SportCard 
+                    title="Athletics" 
+                    image="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                />
+                 <SportCard 
+                    title="Football" 
+                    image="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                />
+            </div>
         </div>
        </section>
     </div>
   );
 };
 
-const FeatureCard = ({ icon, title, description }) => (
-  <motion.div 
-    whileHover={{ y: -5 }}
-    className="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300"
-  >
-    <div className="h-14 w-14 bg-pool-blue rounded-lg flex items-center justify-center mb-6 shadow-sm">
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-    <p className="text-gray-600 leading-relaxed">{description}</p>
-  </motion.div>
-);
+const SportCard = ({ title, image }) => (
+    <motion.div 
+        whileHover={{ y: -10 }}
+        className="group relative h-96 rounded-lg overflow-hidden cursor-pointer"
+    >
+        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${image})` }}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+        <div className="absolute bottom-0 left-0 p-8 w-full">
+            <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
+            <div className="h-1 w-12 bg-pool-blue transform origin-left transition-all duration-300 group-hover:w-full"></div>
+        </div>
+    </motion.div>
+)
 
 export default Home;

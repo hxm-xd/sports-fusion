@@ -1,9 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-pool-blue: #00BFFF;
-  --color-deep-ocean: #006994;
-  --color-water-cyan: #E0FFFF;
+  --color-deep-ocean: #021024;
+  --color-pool-dark: #05263d;
+  --color-pool-blue: #3bd6f5;
+  --color-water-cyan: #cffafe;
+  --color-text-light: #f0f9ff;
+  --color-text-dim: #94a3b8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-deep-ocean);
+  color: var(--color-text-light);
 }
 
 

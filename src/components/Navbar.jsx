@@ -1,72 +1,109 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Waves } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
+    const { scrollY } = useScroll();
 
-  return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <Waves className="h-8 w-8 text-pool-blue" />
-              <span className="text-xl font-bold text-deep-ocean tracking-wider uppercase">Sports Fusion</span>
-            </Link>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/services">Services</NavLink>
-            <NavLink to="/about">About Us</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-          </div>
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious();
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+        
+        if (latest > 50) {
+            setScrolled(true);
+        } else {
+            setScrolled(false);
+        }
+    });
 
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 hover:text-pool-blue focus:outline-none">
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location]);
 
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          className="md:hidden bg-white border-t"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MobileNavLink to="/" onClick={() => setIsOpen(false)}>Home</MobileNavLink>
-            <MobileNavLink to="/services" onClick={() => setIsOpen(false)}>Services</MobileNavLink>
-            <MobileNavLink to="/about" onClick={() => setIsOpen(false)}>About Us</MobileNavLink>
-            <MobileNavLink to="/contact" onClick={() => setIsOpen(false)}>Contact</MobileNavLink>
-          </div>
-        </motion.div>
-      )}
-    </nav>
-  );
+    return (
+        <>
+            <motion.nav
+                variants={{
+                    visible: { y: 0 },
+                    hidden: { y: "-100%" },
+                }}
+                animate={hidden ? "hidden" : "visible"}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+                    scrolled ? 'bg-deep-ocean/80 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+                }`}
+            >
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-20">
+                        <Link to="/" className="text-2xl font-light tracking-tight text-white flex items-center gap-2">
+                             <span>SPORTS<span className="font-bold text-pool-blue">FUSION</span></span>
+                        </Link>
+
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex items-center space-x-8">
+                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/services">Services</NavLink>
+                            <NavLink to="/about">About</NavLink>
+                            <NavLink to="/contact">Contact</NavLink>
+                             <Link to="/contact" className="ml-4 px-5 py-2.5 rounded-md bg-pool-blue text-deep-ocean text-sm font-bold hover:bg-white transition-colors duration-300">
+                                Get Started
+                            </Link>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <div className="md:hidden">
+                             <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2">
+                                {isOpen ? <X /> : <Menu />}
+                             </button>
+                        </div>
+                    </div>
+                </div>
+            </motion.nav>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: "100%" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: "100%" }}
+                        className="fixed inset-0 z-[60] bg-deep-ocean md:hidden flex flex-col items-center justify-center space-y-8"
+                    >
+                         <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white p-2">
+                            <X className="w-8 h-8" />
+                         </button>
+                        
+                         <MobileNavLink to="/">Home</MobileNavLink>
+                         <MobileNavLink to="/services">Services</MobileNavLink>
+                         <MobileNavLink to="/about">About</MobileNavLink>
+                         <MobileNavLink to="/contact">Contact</MobileNavLink>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
 };
 
 const NavLink = ({ to, children }) => (
-  <Link 
-    to={to} 
-    className="text-gray-600 hover:text-pool-blue font-medium transition-colors duration-200"
-  >
-    {children}
-  </Link>
+    <Link to={to} className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group">
+        {children}
+        <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-pool-blue transition-all duration-300 group-hover:w-full"></span>
+    </Link>
 );
 
-const MobileNavLink = ({ to, children, onClick }) => (
-  <Link 
-    to={to} 
-    onClick={onClick}
-    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pool-blue hover:bg-water-cyan"
-  >
-    {children}
-  </Link>
+const MobileNavLink = ({ to, children }) => (
+    <Link to={to} className="text-3xl font-light text-white hover:text-pool-blue transition-colors">
+        {children}
+    </Link>
 );
 
 export default Navbar;

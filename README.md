@@ -1,16 +1,44 @@
-# React + Vite
+# Sports Fusion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sports Fusion is a modern web application designed for the swimming and aquatic sports ecosystem. It offers integrated IT solutions for meet management, real-time analytics, and live broadcasting.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real-Time Analytics:** Live scoreboard integration and instant web publishing.
+- **Event Management:** Comprehensive tools for seeding, heat management, and finals.
+- **Live Broadcasting:** Integrated tools for high-quality event streaming.
+- **Deep Ocean Theme:** A visually immersive dark theme inspired by the depths of the ocean.
+- **Sticky Slide Navigation:** Interactive service showcase with sticky scroll effects.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React:** UI Library
+- **Vite:** Build Tool
+- **Tailwind CSS v4:** Styling Framework
+- **Framer Motion:** Animations and Gestures
+- **Lucide React:** Icons
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+2.  **Run the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+3.  **Build for production:**
+    ```bash
+    npm run build
+    ```
+
+## Project Structure
+
+- `src/components`: Reusable UI components (Navbar, Footer).
+- `src/pages`: Main application pages (Home, About, Services, Contact).
+- `src/App.jsx`: Main routing and layout configuration.
