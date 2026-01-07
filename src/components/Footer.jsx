@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
@@ -67,9 +68,9 @@ const SocialIcon = ({ icon }) => (
 
 const FooterLink = ({ href, children }) => (
   <li>
-    <a href={href} className="group text-white/60 hover:text-white transition-colors flex items-center">
+    <Link to={href} className="group text-white/60 hover:text-white transition-colors flex items-center">
       <span className="transition-transform duration-200 inline-block group-hover:translate-x-1">{children}</span>
-    </a>
+    </Link>
   </li>
 );
 

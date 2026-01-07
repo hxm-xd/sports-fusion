@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Cable, MonitorDot, Layers, ClipboardList } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const servicesList = [
     {
@@ -91,18 +92,18 @@ const Services = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="group inline-flex items-center justify-center px-6 py-3 rounded-sm bg-pool-blue text-deep-ocean font-bold hover:bg-water-cyan transition-colors duration-200 ring-1 ring-white/10"
             >
               Contact <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className="inline-flex items-center justify-center px-6 py-3 rounded-sm border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-200"
             >
               Back to Home
-            </a>
+            </Link>
           </div>
         </div>
       </motion.div>

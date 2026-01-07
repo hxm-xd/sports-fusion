@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import heroVideo from '../assets/hero.mp4';
@@ -86,9 +87,9 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
                 )}
 
                 {linkText && (
-                  <a href={linkUrl} className="text-pool-blue font-bold text-lg hover:text-white transition-colors inline-flex items-center group">
+                  <Link to={linkUrl} className="text-pool-blue font-bold text-lg hover:text-white transition-colors inline-flex items-center group">
                     {linkText} <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 )}
               </motion.div>
             </div>
@@ -162,12 +163,12 @@ const Home = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-6"
             >
-              <a href="/contact" className="group px-8 py-4 bg-pool-blue text-deep-ocean font-bold rounded-sm hover:bg-water-cyan transition-colors duration-200 flex items-center ring-1 ring-white/10">
+              <Link to="/contact" className="group px-8 py-4 bg-pool-blue text-deep-ocean font-bold rounded-sm hover:bg-water-cyan transition-colors duration-200 flex items-center ring-1 ring-white/10">
                 Get Started <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="/services" className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-sm hover:bg-white/5 transition-colors duration-200">
+              </Link>
+              <Link to="/services" className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-sm hover:bg-white/5 transition-colors duration-200">
                 Explore Services
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

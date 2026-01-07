@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Gauge, ShieldCheck, Workflow, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const highlights = [
     {
@@ -97,18 +98,18 @@ const About = () => {
                             </ul>
 
                             <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4">
-                                <a
-                                    href="/services"
+                                <Link
+                                    to="/services"
                                     className="group inline-flex items-center justify-center px-6 py-3 rounded-sm bg-pool-blue text-deep-ocean font-bold hover:bg-water-cyan transition-colors duration-200 ring-1 ring-white/10"
                                 >
                                     Explore Services <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                </a>
-                                <a
-                                    href="/contact"
+                                </Link>
+                                <Link
+                                    to="/contact"
                                     className="inline-flex items-center justify-center px-6 py-3 rounded-sm border border-white/20 text-white font-medium hover:bg-white/5 transition-colors duration-200"
                                 >
                                     Contact
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </aside>
