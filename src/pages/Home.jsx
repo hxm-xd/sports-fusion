@@ -170,18 +170,6 @@ const Home = () => {
           </motion.div>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/50"
-        >
-            <span className="text-xs uppercase tracking-widest mb-2">Scroll</span>
-            <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
-                <div className="w-full h-1/2 bg-white animate-pulsedown"></div>
-            </div>
-        </motion.div>
       </section>
 
       {/* Sticky Services Slides */}

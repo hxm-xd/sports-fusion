@@ -3,24 +3,22 @@ import { motion } from 'framer-motion';
 
 const About = () => {
     return (
-        <div className="min-h-screen bg-pool-dark py-24 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-deep-ocean py-24 px-4 sm:px-6 lg:px-8">
              <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
-                className="max-w-5xl mx-auto pt-10"
+                className="max-w-5xl mx-auto pt-16"
             >
-                <div className="bg-white/5 backdrop-blur-md p-8 md:p-16 rounded-lg shadow-xl border border-white/10 relative overflow-hidden">
-                    {/* Decorative Background */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-pool-blue/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-40 h-40 bg-deep-ocean/40 rounded-full -ml-10 -mb-10 blur-2xl"></div>
+                <div className="bg-white/4 p-8 md:p-14 rounded-md border border-white/10 relative overflow-hidden">
+                    <div className="absolute inset-x-0 top-0 h-px bg-white/10"></div>
 
                     <div className="relative z-10">
                         <motion.span 
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-pool-blue font-bold tracking-widest uppercase text-sm block mb-3"
+                            className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70 block mb-3"
                         >
                             Who We Are
                         </motion.span>
@@ -54,7 +52,7 @@ const About = () => {
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.6 }}
-                                className="bg-pool-blue/10 p-6 rounded-lg border-l-4 border-pool-blue"
+                                className="bg-white/4 p-6 rounded-md border-l-4 border-pool-blue"
                             >
                                 <p className="text-white font-medium italic">
                                     "Our mission is to empower event organizers with reliable, efficient, and modern tools so they can focus on what matters most: the athletes and the competition."

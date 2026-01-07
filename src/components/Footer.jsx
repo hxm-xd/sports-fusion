@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
              <div className="mb-6 flex items-center gap-2">
-                 <span className="text-2xl font-light tracking-tight text-white">SPORTS<span className="font-bold text-pool-blue">FUSION</span></span>
+                 <span className="text-2xl font-light tracking-tight text-white">SPORTS <span className="font-bold text-pool-blue">FUSION</span></span>
             </div>
             <p className="text-white/60 max-w-sm leading-relaxed mb-6">
               Premier provider of integrated IT solutions designed to streamline every aspect of swimming meet management. Bringing precision to the pool deck.
@@ -67,7 +67,7 @@ const SocialIcon = ({ icon }) => (
 
 const FooterLink = ({ href, children }) => (
   <li>
-    <a href={href} className="text-white/60 hover:text-white transition-colors flex items-center">
+    <a href={href} className="group text-white/60 hover:text-white transition-colors flex items-center">
       <span className="transition-transform duration-200 inline-block group-hover:translate-x-1">{children}</span>
     </a>
   </li>

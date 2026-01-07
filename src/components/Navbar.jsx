@@ -45,7 +45,7 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         <Link to="/" className="text-2xl font-light tracking-tight text-white flex items-center gap-2">
-                             <span>SPORTS<span className="font-bold text-pool-blue">FUSION</span></span>
+                             <span>SPORTS <span className="font-bold text-pool-blue">FUSION</span></span>
                         </Link>
 
                         {/* Desktop Menu */}
