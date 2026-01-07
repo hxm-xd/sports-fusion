@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import heroVideo from '../assets/hero.mp4';
 
 const homeVariants = {
   hidden: { opacity: 0 },
@@ -48,13 +49,11 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
     const isEven = index % 2 === 0;
     
     return (
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-deep-ocean border-t border-white/5">
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-deep-ocean border-t border-white/10">
              {/* Background Image with Gradient Overlay */}
             <div className="absolute inset-0 z-0">
-                <img src={image} alt={title} className="w-full h-full object-cover opacity-20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-deep-ocean via-deep-ocean/95 to-deep-ocean/40"></div>
-                {/* Additional gradient for bottom fade */}
-                <div className="absolute inset-0 bg-gradient-to-t from-deep-ocean via-transparent to-transparent"></div>
+          <img src={image} alt={title} className="w-full h-full object-cover opacity-15" />
+          <div className="absolute inset-0 bg-deep-ocean/85"></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
@@ -65,7 +64,7 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight">
                                 {title.split(' ').map((word, i) => (
                                     <span key={i} className={i === 1 ? 'text-pool-blue' : ''}> {word} </span>
                                 ))}
@@ -78,7 +77,7 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
                                 <ul className="space-y-4 mb-10">
                                     {features.map((feature, i) => (
                                         <li key={i} className="flex items-center text-white/90">
-                                            <span className="w-2 h-2 bg-pool-blue rounded-sm mr-4"></span>
+                                          <span className="w-2 h-2 bg-pool-blue rounded-none mr-4"></span>
                                             {feature}
                                         </li>
                                     ))}
@@ -98,9 +97,9 @@ const StickySlide = ({ title, description, image, features, linkText, linkUrl, i
                             initial={{ opacity: 0, scale: 0.9, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="aspect-[4/3] rounded-lg overflow-hidden shadow-2xl shadow-pool-blue/10 border border-white/10"
+                            className="aspect-[4/3] rounded-md overflow-hidden border border-white/15"
                         >
-                             <img src={image} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                             <img src={image} alt={title} className="w-full h-full object-cover" />
                         </motion.div>
                     </div>
                 </div>
@@ -119,11 +118,20 @@ const Home = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
              <div className="absolute inset-0 bg-deep-ocean/50 z-10"></div>
-             {/* Dynamic Pool Background */}
-             <motion.div 
+             {/* Hero Video Background */}
+             <motion.video
                 style={{ y: y1 }}
-                className="w-full h-[120%] -mt-20 bg-[url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center"
-             ></motion.div>
+                className="w-full h-[120%] -mt-20 object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                aria-hidden="true"
+              >
+                <source src={heroVideo} type="video/mp4" />
+              </motion.video>
         </div>
         
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto text-white">
@@ -136,9 +144,9 @@ const Home = () => {
            
             <motion.h1 
               variants={itemVariants}
-              className="text-5xl md:text-8xl font-light mb-8 tracking-tighter"
+              className="text-5xl md:text-8xl font-light mb-8 tracking-tight"
             >
-              Precision <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-pool-blue to-white">Meets</span> Performance
+              Precision <span className="font-bold text-pool-blue">Meets</span> Performance
             </motion.h1>
             
             <motion.p 
@@ -152,10 +160,10 @@ const Home = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-6"
             >
-              <a href="/contact" className="group px-8 py-4 bg-pool-blue text-deep-ocean font-bold rounded-md hover:bg-white transition-all duration-300 transform hover:-translate-y-1 flex items-center">
+              <a href="/contact" className="group px-8 py-4 bg-pool-blue text-deep-ocean font-bold rounded-sm hover:bg-water-cyan transition-colors duration-200 flex items-center ring-1 ring-white/10">
                 Get Started <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="/services" className="px-8 py-4 bg-transparent border border-white/30 text-white font-medium rounded-md hover:bg-white/10 transition-all duration-300">
+              <a href="/services" className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-sm hover:bg-white/5 transition-colors duration-200">
                 Explore Services
               </a>
             </motion.div>
@@ -184,7 +192,7 @@ const Home = () => {
       </div>
 
        {/* Other Sports Section */}
-       <section className="py-32 bg-deep-ocean relative z-10">
+         <section className="py-32 bg-deep-ocean relative z-10 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Beyond the Pool</h2>
@@ -216,10 +224,10 @@ const Home = () => {
 const SportCard = ({ title, image }) => (
     <motion.div 
         whileHover={{ y: -10 }}
-        className="group relative h-96 rounded-lg overflow-hidden cursor-pointer"
+    className="group relative h-96 rounded-md overflow-hidden cursor-pointer border border-white/10"
     >
         <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${image})` }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+    <div className="absolute inset-0 bg-gradient-to-t from-deep-ocean via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
         <div className="absolute bottom-0 left-0 p-8 w-full">
             <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
             <div className="h-1 w-12 bg-pool-blue transform origin-left transition-all duration-300 group-hover:w-full"></div>

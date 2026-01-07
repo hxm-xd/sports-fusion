@@ -3,7 +3,7 @@ import { Mail, MapPin, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-deep-ocean border-t border-white/5 pt-16 pb-8">
+    <footer className="bg-deep-ocean border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
@@ -21,7 +21,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">Quick Links</h3>
             <ul className="space-y-4">
               <FooterLink href="/">Home</FooterLink>
               <FooterLink href="/services">Services</FooterLink>
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Contact</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">Contact</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3 text-white/60">
                 <Mail className="h-5 w-5 text-pool-blue mt-1 flex-shrink-0" />
@@ -47,7 +47,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-white/5 pt-8 text-center flex flex-col md:flex-row justify-between items-center text-white/40 text-sm">
+        <div className="border-t border-white/10 pt-8 text-center flex flex-col md:flex-row justify-between items-center text-white/40 text-sm">
           <p>© {new Date().getFullYear()} Sports Fusion. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
@@ -60,15 +60,15 @@ const Footer = () => {
 };
 
 const SocialIcon = ({ icon }) => (
-  <a href="#" className="h-10 w-10 bg-white/5 hover:bg-pool-blue hover:text-deep-ocean rounded-md flex items-center justify-center text-white transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1">
+  <a href="#" className="h-10 w-10 bg-white/5 hover:bg-white/10 rounded-sm flex items-center justify-center text-white transition-colors duration-200 border border-white/10 hover:border-pool-blue/40">
     {icon}
   </a>
 );
 
 const FooterLink = ({ href, children }) => (
   <li>
-    <a href={href} className="text-white/60 hover:text-pool-blue transition-colors flex items-center">
-      <span className="hover:translate-x-1 transition-transform duration-200 inline-block">{children}</span>
+    <a href={href} className="text-white/60 hover:text-white transition-colors flex items-center">
+      <span className="transition-transform duration-200 inline-block group-hover:translate-x-1">{children}</span>
     </a>
   </li>
 );

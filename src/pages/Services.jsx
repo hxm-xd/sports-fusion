@@ -45,7 +45,7 @@ const cardVariants = {
 
 const Services = () => {
   return (
-    <div className="min-h-screen bg-pool-dark py-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-deep-ocean py-24 px-4 sm:px-6 lg:px-8">
       <motion.div 
         initial="hidden"
         animate="visible"
@@ -81,14 +81,13 @@ const ServiceCard = ({ title, description }) => (
     <motion.div 
         variants={cardVariants}
         whileHover={{ scale: 1.02 }}
-        className="bg-white/5 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-white/5 hover:border-pool-blue/30 transition-all duration-300 relative overflow-hidden group"
+    className="bg-white/4 p-8 rounded-md border border-white/10 hover:border-pool-blue/35 transition-colors duration-200 relative overflow-hidden group"
     >
-        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-pool-blue to-deep-ocean transform origin-left md:group-hover:w-3 transition-all"></div>
+    <div className="absolute top-0 left-0 w-1.5 h-full bg-pool-blue transform origin-left md:group-hover:w-2 transition-all"></div>
         <div className="pl-6">
             <h2 className="text-2xl font-bold mb-4 text-white group-hover:text-pool-blue transition-colors">{title}</h2>
             <p className="text-white/60 leading-relaxed text-lg">{description}</p>
         </div>
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-pool-blue/10 rounded-full blur-2xl group-hover:bg-pool-blue/20 transition-all"></div>
     </motion.div>
 );
 
